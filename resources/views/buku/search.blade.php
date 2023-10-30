@@ -12,7 +12,7 @@
 <body>
     <x-app-layout>
         <x-slot name="header">
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                <h2 class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     {{ __('Daftar Buku') }}
                 </h2>
         </x-slot>
@@ -43,44 +43,44 @@
             <div class="alert alert-success text-green-500 mx-6">Ditemukan <strong>{{ count($data_buku) }}</strong> data dengan kata: <strong>{{ $cari }}</strong></div>
             <div class="px-6">
                 <table class="text-left w-full border-collapse text-gray-200">
-                    <thead class="border-b">
+                    <thead class="border-b border-gray-700 ">
                         <tr>
-                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-100">id</th>
-                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-100">Judul Buku</th>
-                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-100">Penulis</th>
-                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-100">Harga</th>
-                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-100">Tanggal Terbit</th>
-                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-100" colspan="2" align="center">Aksi</th>
+                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-900">id</th>
+                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-900">Judul Buku</th>
+                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-900">Penulis</th>
+                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-900">Harga</th>
+                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-900">Tanggal Terbit</th>
+                            <th class="py-3 px-5 font-medium uppercase text-sm text-gray-900" colspan="2" align="center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($data_buku as $buku)
-                        <tr class="hover:bg-gray-800">
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">{{ $buku->id }}</td>
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">{{ $buku->judul }}</td>
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">{{ $buku->penulis }}</td>
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">{{ "Rp ".number_format($buku->harga, 2, ',', '.') }}</td>
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y') }}</td>
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">
+                        <tr class="hover:bg-rose-300">
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->id }}</td>
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->judul }}</td>
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->penulis }}</td>
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ "Rp ".number_format($buku->harga, 2, ',', '.') }}</td>
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y') }}</td>
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">
                                 <form action="{{ route('buku.destroy', $buku->id) }}" method="post">
                                     @csrf
-                                    <button class="bg-blue-500 text-white rounded-md py-2 px-4" onclick="return confirm('yakin mau dihapus?')">Hapus</button>
+                                    <button class="bg-red-500 text-white rounded-md py-2 px-4" onclick="return confirm('yakin mau dihapus?')">Hapus</button>
                                 </form>
                             </td>
-                            <td class="py-4 px-6 border-b text-gray-400 text-sm">
-                                <button class="bg-red-500 text-white rounded-md py-2 px-4"><a href="{{ route('buku.edit', $buku->id) }}">Edit</a></button> 
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">
+                                <button class="bg-blue-500 text-white rounded-md py-2 px-4"><a href="{{ route('buku.edit', $buku->id) }}">Edit</a></button> 
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-100" colspan="3">TOTAL HARGA</td>
-                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-100" colspan="4">{{ "Rp ".number_format($total_harga, 2, ',', '.') }}</td>
+                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-900" colspan="3">TOTAL HARGA</td>
+                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-900" colspan="4">{{ "Rp ".number_format($total_harga, 2, ',', '.') }}</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-100" colspan="3">JUMLAH BUKU</td>
-                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-100" colspan="4">{{ $jumlah_data }}</td>
+                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-900" colspan="3">JUMLAH BUKU</td>
+                            <td class="py-3 px-5 font-medium uppercase text-sm text-gray-900" colspan="4">{{ $jumlah_data }}</td>
                         </tr>
                     </tfoot>
                 </table>

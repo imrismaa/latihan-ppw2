@@ -12,11 +12,11 @@
 <body>
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Edit Buku') }}
             </h2>
         </x-slot>
-        <div class="container p-4 border rounded-lg shadow-md mt-4 mx-auto max-w-md mb-6">
+        <div class="container p-4 shadow-xl dark:bg-rose-300 rounded-lg mt-4 mx-auto max-w-md mb-6">
             @if (count($errors) > 0)
                 <ul class="alert alert-danger text-red-500">
                     @foreach ($errors->all() as $error)
@@ -27,19 +27,19 @@
             <form action="{{route('buku.update',$buku->id)}}" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="judul" class="text-gray-200">Judul</label>
+                    <label for="judul" class="text-gray-900">Judul</label>
                     <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="text" name="judul" id="judul" value="{{$buku->judul}}">
                 </div>
                 <div class="mb-4">
-                    <label for="penulis" class="text-gray-200">Penulis</label>
+                    <label for="penulis" class="text-gray-900">Penulis</label>
                     <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="text" name="penulis" id="penulis" value="{{$buku->penulis}}">
                 </div>
                 <div class="mb-4">
-                    <label for="harga" class="text-gray-200">Harga</label>
+                    <label for="harga" class="text-gray-900">Harga</label>
                     <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="text" name="harga" id="harga" value="{{$buku->harga}}">
                 </div>
                 <div class="mb-4">
-                    <label for="tanggal_terbit" class="text-gray-200">Tanggal Terbit</label>
+                    <label for="tanggal_terbit" class="text-gray-900">Tanggal Terbit</label>
                     <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="date" name="tgl_terbit" id="tgl_terbit" value="{{$buku->tgl_terbit}}">
                 </div>
                 <div class="flex justify-center mt-4">
