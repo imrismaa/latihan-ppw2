@@ -70,4 +70,8 @@ class BukuController extends Controller
         return view('buku.search', compact('data_buku', 'jumlah_data', 'cari', 'no', 'total_harga'));
     }
 
+    public function _construct() {
+        $this->middleware('auth');
+    }
+
 }

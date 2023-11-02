@@ -18,13 +18,15 @@
             </h2>
         </x-slot>
 
+        @if(Auth::check() && Auth::user()->level == 'admin')
         <button class="mx-6 mt-3 bg-blue-500 text-white rounded-md py-2 px-4">
             <a href="{{ route('buku.create') }}">Tambah Buku</a>
         </button>
+        @endif
 
         <form action="{{ route('buku.search') }}" method="get">
             @csrf
-            <input type="text" name="kata" class="form-control sm:rounded-lg mr-6" 
+            <input type="text" name="kata" class="form-control sm:rounded-lg mr-6 mt-3" 
                 placeholder="Cari ..." style="display: inline; margin-bottom: 10px; float: right;">
         </form>
         
@@ -49,7 +51,9 @@
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Penulis</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Harga</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Tanggal Terbit</th>
+                        @if(Auth::check() && Auth::user()->level == 'admin')
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800" colspan="2" align="center">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +64,7 @@
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->penulis }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ "Rp ".number_format($buku->harga, 2, ',', '.') }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y') }}</td>
+                        @if(Auth::check() && Auth::user()->level == 'admin')
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">
                             <form action="{{ route('buku.destroy', $buku->id) }}" method="post">
                                 @csrf
@@ -69,6 +74,7 @@
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">
                             <button class="bg-blue-500 text-white rounded-md py-2 px-4"><a href="{{ route('buku.edit', $buku->id) }}">Edit</a></button> 
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
