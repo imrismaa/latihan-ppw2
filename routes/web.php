@@ -26,7 +26,6 @@ Route::get('/dashboard', function () {
 
 //buku
 Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
-
 Route::post('/buku', [BukuController::class, 'store'])->name('buku.store');
 Route::post('/buku/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
 Route::get('/buku/search', [BukuController::class, 'search'])->name('buku.search');

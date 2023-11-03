@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if(auth()->user()->level != 'admin') {
-            return redirect()->route('dashboard');
+            return redirect()->back();
         }
         return $next($request);
     }
