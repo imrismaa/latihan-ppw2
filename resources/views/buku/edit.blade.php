@@ -24,7 +24,7 @@
                     @endforeach
                 </ul>
             @endif
-            <form action="{{route('buku.update',$buku->id)}}" method="POST">
+            <form action="{{route('buku.update',$buku->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
                     <label for="judul" class="text-gray-900">Judul</label>
@@ -42,12 +42,16 @@
                     <label for="tanggal_terbit" class="text-gray-900">Tanggal Terbit</label>
                     <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="date" name="tgl_terbit" id="tgl_terbit" value="{{$buku->tgl_terbit}}">
                 </div>
+                <div class="mb-4">
+                    <label for="file_upload" class="text-gray-900">Thumbnail</label>
+                    <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="file" name="thumbnail" id="thumbnail" value="{{$buku->filename}}">
+                </div>
                 <div class="flex justify-center mt-4">
                     <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3" type="submit">Simpan</button>
                     <button class="bg-red-500 text-white rounded-md py-2 px-4 mx-3"><a href="/buku"> Batal</a></button>
                 </div>
             </form>
-    </div>
+        </div>
     </x-app-layout>
 </body>
 </html>

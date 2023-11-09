@@ -47,6 +47,7 @@
                 <thead class="border-b border-gray-700 ">
                     <tr>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">id</th>
+                        <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Thumbnail</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Judul Buku</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Penulis</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Harga</th>
@@ -60,6 +61,11 @@
                     @foreach($data_buku as $buku)
                     <tr class="hover:bg-rose-300">
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->id }}</td>
+                        @if($buku->filepath)
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">
+                                <img src="{{ asset ($buku->filepath) }}" alt="">
+                            </td>
+                        @endif
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->judul }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->penulis }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ "Rp ".number_format($buku->harga, 2, ',', '.') }}</td>
