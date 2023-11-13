@@ -65,6 +65,8 @@
                             <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">
                                 <img src="{{ asset ($buku->filepath) }}" alt="">
                             </td>
+                        @else
+                            <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">Image not found</td>
                         @endif
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->judul }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->penulis }}</td>

@@ -16,7 +16,7 @@
                 {{ __('Edit Buku') }}
             </h2>
         </x-slot>
-        <div class="container p-4 shadow-xl dark:bg-rose-300 rounded-lg mt-4 mx-auto max-w-md mb-6">
+        <div class="container p-4 shadow-xl dark:bg-rose-300 rounded-lg mt-4 mx-auto max-w-xl mb-6">
             @if (count($errors) > 0)
                 <ul class="alert alert-danger text-red-500">
                     @foreach ($errors->all() as $error)
@@ -46,9 +46,33 @@
                     <label for="file_upload" class="text-gray-900">Thumbnail</label>
                     <input class="w-full mt-1 px-2 py-2 rounded-lg border" type="file" name="thumbnail" id="thumbnail" value="{{$buku->filename}}">
                 </div>
+                <div class="mb-4">
+                    <label for="file_upload" class="text-gray-900">Gallery</label>
+                    <div class="mt-2" id="fileinput_wrapper">
+
+                    </div>
+                    <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3 my-2 hover:opacity-70" type="submit">
+                        <a href="javascript:void(0);" id="tambah" onclick="addFileInput()">Tambah</a>
+                    </button>
+                
+                    <script type="text/javascript">
+                        function addFileInput () {
+                            var div = document.getElementById('fileinput_wrapper');
+                            div.innerHTML += '<input class="w-full mt-1 px-2 py-2 rounded-lg border" type="file" name="gallery[]" id="gallery">';
+                        };
+                    </script>
+                </div>
+                <div class="flex flex-row space-x-4">
+                    @foreach($buku->galeri()->get() as $gallery)
+                        <div class="relative group">
+                            <img class="rounded-sm object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="200"/>
+                            <button class="bg-red-500 text-white rounded-md px-2 my-2 hover:opacity-70"><a href="{{ route('galeri.destroy', $gallery->id) }}">Delete</a>
+                        </div>
+                    @endforeach
+                </div>
                 <div class="flex justify-center mt-4">
-                    <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3" type="submit">Simpan</button>
-                    <button class="bg-red-500 text-white rounded-md py-2 px-4 mx-3"><a href="/buku"> Batal</a></button>
+                    <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3 hover:opacity-70" type="submit">Simpan</button>
+                    <button class="bg-red-500 text-white rounded-md py-2 px-4 mx-3 hover:opacity-70"><a href="/buku"> Batal</a></button>
                 </div>
             </form>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BukuModel;
+use App\Models\GaleriModel;
 use Intervention\Image\Facades\Image;
 
 class BukuController extends Controller
@@ -71,7 +72,7 @@ class BukuController extends Controller
                 $fileName = time().'_'.$file->getClientOriginalName();
                 $filePath = $file->storeAs('uploads', $fileName, 'public');
 
-                $gallery = Gallery::create([
+                $gallery = GaleriModel::create([
                     'nama_galeri' => $fileName,
                     'path' => '/storage/' . $filePath,
                     'foto' => $fileName,
@@ -87,6 +88,13 @@ class BukuController extends Controller
         $buku = BukuModel::find($id);
         $buku->delete();
         return redirect('/buku')->with('deleted_message', 'Data buku berhasil dihapus');
+    }
+
+    public function destroyGallery($id) { 
+        $gallery = GaleriModel::findOrFail($id);
+        $gallery->delete();
+
+        return redirect()->back();
     }
 
     public function search(Request $request) {

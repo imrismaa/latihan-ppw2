@@ -22,6 +22,6 @@ class BukuModel extends Model
 
     public function galeri(): HasMany
     {
-        return $this->hasMany(GaleriModel::class);
+        return $this->hasMany(GaleriModel::class, 'buku_id');
     }
 }
