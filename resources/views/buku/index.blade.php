@@ -19,7 +19,7 @@
         </x-slot>
 
         @if(Auth::check() && Auth::user()->level == 'admin')
-        <button class="mx-6 mt-3 bg-blue-500 text-white rounded-md py-2 px-4">
+        <button class="mx-6 mt-3 bg-blue-500 text-white rounded-md py-2 px-4 hover:opacity-70">
             <a href="{{ route('buku.create') }}">Tambah Buku</a>
         </button>
         @endif
@@ -63,9 +63,9 @@
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->id }}</td>
                         @if($buku->filepath)
                             <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">
-                                <img src="{{ asset ($buku->filepath) }}" alt="">
+                                <img src="{{ asset ($buku->filepath) }}" width="100">
                             </td>
-                        @else
+                        @elseif($buku->filepath == null)
                             <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">Image not found</td>
                         @endif
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->judul }}</td>
@@ -76,11 +76,11 @@
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">
                             <form action="{{ route('buku.destroy', $buku->id) }}" method="post">
                                 @csrf
-                                <button class="bg-red-500 text-white rounded-md py-2 px-4" onclick="return confirm('yakin mau dihapus?')">Hapus</button>
+                                <button class="bg-red-500 text-white rounded-md py-2 px-4 hover:opacity-70" onclick="return confirm('yakin mau dihapus?')">Hapus</button>
                             </form>
                         </td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">
-                            <button class="bg-blue-500 text-white rounded-md py-2 px-4"><a href="{{ route('buku.edit', $buku->id) }}">Edit</a></button> 
+                            <button class="bg-blue-500 text-white rounded-md py-2 px-4 hover:opacity-70"><a href="{{ route('buku.edit', $buku->id) }}">Edit</a></button> 
                         </td>
                         @endif
                     </tr>
