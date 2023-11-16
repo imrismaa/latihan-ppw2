@@ -154,4 +154,21 @@ class BukuController extends Controller
         $this->middleware('auth');
     }
 
+    public function galbuku($id) {
+        $buku = BukuModel::find($id);
+        $galeris = $buku->galeri()->orderBy('id', 'desc')->paginate(5);
+
+        return view('buku.detailbuku', compact('buku', 'galeris'));
+    }
+
+    public function listbuku(){
+        $batas = 5;
+        $data_buku = BukuModel::simplePaginate($batas);
+        $jumlah_data = $data_buku->count('id');
+        $total_harga = $data_buku->sum('harga');
+        $no = $batas * ($data_buku->currentPage() - 1);
+
+        return view('buku.listbuku', compact('data_buku', 'jumlah_data', 'total_harga', 'no'));
+    }
+
 }

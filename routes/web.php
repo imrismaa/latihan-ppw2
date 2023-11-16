@@ -28,7 +28,8 @@ Route::get('/dashboard', function () {
 Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
 Route::post('/buku', [BukuController::class, 'store'])->name('buku.store');
 Route::get('/buku/search', [BukuController::class, 'search'])->name('buku.search');
-
+Route::get('/detail-buku/{id}',[BukuController::class, 'galbuku'])->name('buku.detailbuku');
+Route::get('/listbuku', [BukuController::class, 'listbuku'])->name('buku.listbuku');
 
 Route::middleware('auth')->group(function () {
 
