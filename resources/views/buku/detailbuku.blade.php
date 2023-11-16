@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="{{ asset('dist/css/lightbox.min.css') }}" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -40,12 +41,14 @@
                 <div class="flex flex-row space-x-4">
                     @foreach($buku->galeri()->get() as $gallery)
                         <div class="relative group">
-                            <img class="rounded-sm object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="200"/>
+                            <a href="{{ asset($gallery->path) }}" data-lightbox="image-1">
+                            <img class="rounded-sm object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="200"/></a>
                         </div>
                     @endforeach
                 </div>
             </form>
         </div>
     </x-app-layout>
+    <script src="{{ asset('dist/js/lightbox-plus-jquery.min.js') }}"></script>
 </body>
 </html>
