@@ -30,6 +30,16 @@ Route::post('/buku', [BukuController::class, 'store'])->name('buku.store');
 Route::get('/buku/search', [BukuController::class, 'search'])->name('buku.search');
 Route::get('/detail-buku/{id}',[BukuController::class, 'galbuku'])->name('buku.detailbuku');
 Route::get('/listbuku', [BukuController::class, 'listbuku'])->name('buku.listbuku');
+Route::post('/buku/rate/{id}', [BukuController::class, 'rating'])->name('buku.rate');
+Route::post('/buku/favorites/{id}', [BukuController::class, 'favorite'])->name('buku.favorite');
+
+Route::post('/buku/{id}/storeRating', [BukuController::class, 'storeRating'])->name('buku.storeRating');
+
+//menyimpan ke favorit
+Route::post('/buku/{id}/addToFavourite', [BukuController::class, 'addToFavourite'])->name('buku.addToFavourite');
+
+//menampilkan buku favorit
+Route::get('/buku/myfavourite', [BukuController::class, 'myFavouriteBooks'])->name('buku.myFavouriteBooks');
 
 Route::middleware('auth')->group(function () {
 

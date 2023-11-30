@@ -38,13 +38,43 @@
                     <label for="tanggal_terbit" class="text-gray-900">Tanggal Terbit</label>
                     <div class="w-full mt-1 px-2 py-2 rounded-lg border"><p>{{$buku->tgl_terbit}}</p></div>
                 </div>
-                <div class="flex flex-row space-x-4">
+                <div class="flex flex-row space-x-4 mb-4">
                     @foreach($buku->galeri()->get() as $gallery)
                         <div class="relative group">
                             <a href="{{ asset($gallery->path) }}" data-lightbox="image-1">
                             <img class="rounded-sm object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="200"/></a>
                         </div>
                     @endforeach
+                </div>
+                <div class="mb-4">
+                    <label for="rating" class="text-gray-900">Rate</label>
+                    @if ($buku->avgRating > 0)
+                                    {{ number_format($buku->avgRating, 2, '.', '') }}
+                                @else
+                                    <span class="text-red-500">Belum ada rating</span>
+                                @endif
+                </div>
+                <div class="mb-4">
+                    <label for="rating" class="text-gray-900">Rate</label>
+                    <form action="{{ route('buku.storeRating', $buku->id) }}" method="POST">
+                        @csrf
+                        <select name="rating" id="rating" class="block w-full mt-1 px-2 py-2 rounded-lg border">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div class="flex justify-center mt-4">
+                            <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3" type="submit">Submit rating</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <form action="{{ route('buku.addToFavourite', $buku->id) }}" method="POST">
+                        @csrf
+                        <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3" type="submit">Simpan ke daftar favorite</button>
+                    </form>
                 </div>
             </form>
         </div>

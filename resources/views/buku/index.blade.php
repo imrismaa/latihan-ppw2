@@ -49,6 +49,7 @@
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">id</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Thumbnail</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Judul Buku</th>
+                        <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Rating</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Penulis</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Harga</th>
                         <th class="py-3 px-5 font-medium uppercase text-sm text-gray-800">Tanggal Terbit</th>
@@ -66,9 +67,10 @@
                                 <img src="{{ asset ($buku->filepath) }}" width="100">
                             </td>
                         @elseif($buku->filepath == null)
-                            <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">Image not found</td>
+                            <td class="py-4 px-6 border-b border-gray-700 text-red-700 text-sm">Image not found</td>
                         @endif
-                        <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->judul }}</td>
+                        <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm"><a href="{{ route('buku.detailbuku', $buku->id)}}">{{ $buku->judul }}</a></td>
+                        <td class="py-4 px-6 border-b border-gray-700 text-red-700 text-sm">Rating is not available</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->penulis }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ "Rp ".number_format($buku->harga, 2, ',', '.') }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y') }}</td>
