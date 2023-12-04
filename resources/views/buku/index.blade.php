@@ -68,7 +68,7 @@
                         @elseif($buku->filepath == null)
                             <td class="py-4 px-6 border-b border-gray-700 text-gray-400 text-sm">Image not found</td>
                         @endif
-                        <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->judul }}</td>
+                        <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm"><a href="{{ route('buku.detailbuku', $buku->id)}}">{{ $buku->judul }}</a></td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ $buku->penulis }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ "Rp ".number_format($buku->harga, 2, ',', '.') }}</td>
                         <td class="py-4 px-6 border-b border-gray-700 text-gray-700 text-sm">{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y') }}</td>

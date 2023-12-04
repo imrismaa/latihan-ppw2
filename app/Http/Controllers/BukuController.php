@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BukuModel;
 use App\Models\GaleriModel;
+use App\Models\RatingModel;
+use App\Models\FavoriteModel;
 use Intervention\Image\Facades\Image;
 
 class BukuController extends Controller
@@ -169,6 +171,42 @@ class BukuController extends Controller
         $no = $batas * ($data_buku->currentPage() - 1);
 
         return view('buku.listbuku', compact('data_buku', 'jumlah_data', 'total_harga', 'no'));
+    }
+
+    public function rate(Request $request, $id) {
+        $buku = BukuModel::find($id);
+
+        $existingRating = RatingModel::where('user_id', auth()->user()->id)
+            ->where('buku_id', $buku->id)
+            ->first();
+
+        if ($existingRating) {
+            return redirect()->back()->with('error', 'Anda sudah memberikan rating untuk buku ini.');
+        }
+
+        RatingModel::create([
+            'buku_id' => $buku->id,
+            'user_id' => auth()->user()->id,
+            'rating' => $request->rating,
+        ]);
+
+        return redirect()->back()->with('success', 'Rating berhasil disimpan.');
+    }
+
+    public function addToFavorites(Request $request, $id)
+    {
+        $buku = BukuModel::find($id);
+
+        $existingFavorites = FavoriteModel::where('user_id', auth()->user()->id)
+            ->where('buku_id', $buku->id)
+            ->first();
+
+        if ($existingFavorites) {
+            return redirect()->back()->with('error', 'Buku sudah ada di favorit Anda.');
+        }
+
+        $buku->favoritedBy()->attach(auth()->user()->id);
+        return redirect()->back()->with('success', 'Buku ditambahkan ke favorit.');
     }
 
 }

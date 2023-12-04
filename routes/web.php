@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,14 @@ Route::post('/buku', [BukuController::class, 'store'])->name('buku.store');
 Route::get('/buku/search', [BukuController::class, 'search'])->name('buku.search');
 Route::get('/detail-buku/{id}',[BukuController::class, 'galbuku'])->name('buku.detailbuku');
 Route::get('/listbuku', [BukuController::class, 'listbuku'])->name('buku.listbuku');
+
+// detail buku
+Route::get('/detail-buku/{title}', [BukuController::class, 'galBuku'])->name('galeri.buku');
+// rate buku
+Route::post('/buku/rate/{id}', [BukuController::class, 'rate'])->name('buku.rate');
+// favorites
+Route::post('/buku/favorites/{id}', [BukuController::class, 'addToFavorites'])->name('buku.favorite');
+Route::get('/buku/myfavorite', [FavoriteController::class, 'index'])->name('favorites.index');
 
 Route::middleware('auth')->group(function () {
 

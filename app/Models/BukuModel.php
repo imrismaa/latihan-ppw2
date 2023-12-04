@@ -24,4 +24,19 @@ class BukuModel extends Model
     {
         return $this->hasMany(GaleriModel::class, 'buku_id');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(RatingModel::class, 'buku_id', 'id');
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings->avg('rating');
+    }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'new_favorites', 'buku_id', 'user_id');
+    }
 }
