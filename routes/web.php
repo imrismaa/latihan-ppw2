@@ -39,8 +39,11 @@ Route::post('/buku/rate/{id}', [BukuController::class, 'rate'])->name('buku.rate
 // favorites
 Route::post('/buku/favorites/{id}', [BukuController::class, 'addToFavorites'])->name('buku.favorite');
 Route::get('/buku/myfavorite', [FavoriteController::class, 'index'])->name('favorites.index');
-
+// populer
 Route::get('/buku/populer', [BukuController::class, 'populer'])->name('buku.populer');
+// review
+Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
+Route::post('/buku/review/{id}', [BukuController::class, 'addReview'])->name('buku.review');
 
 Route::middleware('auth')->group(function () {
 

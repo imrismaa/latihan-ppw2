@@ -39,4 +39,9 @@ class BukuModel extends Model
     {
         return $this->belongsToMany(User::class, 'new_favorites', 'buku_id', 'user_id');
     }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ReviewModel::class, 'buku_id', 'id');
+    }
 }

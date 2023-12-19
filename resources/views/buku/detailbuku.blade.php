@@ -87,7 +87,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="review" class="text-gray-900">Review</label>
-                    <form action="{{ route('buku.rate', $buku->id) }}"" method="POST">
+                    <form action="{{ route('buku.review', $buku->id) }}"" method="POST">
                         @csrf
                         <textarea class="w-full mt-1 px-2 py-2 rounded-lg border" name="review" id="review"></textarea>
                         <div class="flex justify-center mt-4">
@@ -100,6 +100,19 @@
                         @csrf
                         <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3" type="submit">Simpan ke daftar favorite</button>
                     </form>
+                </div>
+                <div class="mb-4">
+                    <label for="reviews" class="text-gray-900">Reviews</label>
+                    <div class="w-full mt-1 px-2 py-2 rounded-lg border">
+                        @forelse($reviews as $review)
+                            <div class="mb-2">
+                                <p>{{ $review->content }}</p>
+                                <small>By: {{ $review->user->name }}</small>
+                            </div>
+                        @empty
+                            <p>No reviews available.</p>
+                        @endforelse
+                    </div>
                 </div>
             </form>
         </div>

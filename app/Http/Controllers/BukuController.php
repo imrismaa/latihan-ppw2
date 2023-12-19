@@ -7,6 +7,7 @@ use App\Models\BukuModel;
 use App\Models\GaleriModel;
 use App\Models\RatingModel;
 use App\Models\FavoriteModel;
+use App\Models\ReviewModel;
 use Intervention\Image\Facades\Image;
 
 class BukuController extends Controller
@@ -160,7 +161,9 @@ class BukuController extends Controller
         $buku = BukuModel::find($id);
         $galeris = $buku->galeri()->orderBy('id', 'desc')->paginate(5);
 
-        return view('buku.detailbuku', compact('buku', 'galeris'));
+        $reviews = $buku->reviews()->where('moderated', true)->get();
+
+        return view('buku.detailbuku', compact('buku', 'galeris', 'reviews'));
     }
 
     public function listbuku(){
@@ -217,5 +220,49 @@ class BukuController extends Controller
         $no = $batas * ($data_buku->currentPage() - 1);
     
         return view('buku.populer', compact('data_buku', 'jumlah_data', 'total_harga', 'no'));
+    }
+
+    public function show($id)
+    {
+        $buku = BukuModel::find($id);
+        $reviews = ReviewModel::where('buku_id', $id)->where('moderated', true)->get();
+
+        return view('buku.show', compact('buku', 'reviews'));
+    }
+
+    public function addReview(Request $request, $bukuId)
+    {
+        $this->validate($request, [
+            'review' => 'required|string',
+        ]);
+
+        $content = $request->input('review');
+        $moderated = $this->isProfanity($content) ? false : true;
+
+        ReviewModel::create([
+            'user_id' => auth()->user()->id,
+            'buku_id' => $bukuId,
+            'content' => $content,
+            'moderated' => $moderated,
+        ]);
+
+        if ($moderated) {
+            return redirect()->back()->with('success', 'Review berhasil ditambahkan');
+        } else {
+            return redirect()->back()->with('error', 'Review mengandung kata-kata tidak sopan!!!');
+        }
+    }
+
+    private function isProfanity($text) {
+        $profanityList = ['jelek', 'shibal', 'bjir'];
+        $lowercaseText = strtolower($text);
+
+        foreach ($profanityList as $profanity) {
+            if (strpos($lowercaseText, $profanity) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
