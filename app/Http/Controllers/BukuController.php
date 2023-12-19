@@ -213,14 +213,13 @@ class BukuController extends Controller
     }
 
     public function populer() {
-        $batas = 5;
-        $data_buku = BukuModel::withCount('ratings')->orderByDesc('ratings_count')->paginate($batas);
+        $data_buku = BukuModel::withCount('ratings')->orderByDesc('ratings_count')->take(10)->get();
         $jumlah_data = $data_buku->count('id');
         $total_harga = $data_buku->sum('harga');
-        $no = $batas * ($data_buku->currentPage() - 1);
-    
-        return view('buku.populer', compact('data_buku', 'jumlah_data', 'total_harga', 'no'));
+        
+        return view('buku.populer', compact('data_buku', 'jumlah_data', 'total_harga'));
     }
+    
 
     public function show($id)
     {

@@ -45,9 +45,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="pagination justify-conten-left mt-1 py-3 px-5">
-            {{ $data_buku->links() }}
-        </div>
     </x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
