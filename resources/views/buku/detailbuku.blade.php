@@ -85,6 +85,16 @@
                         </div>
                     </form>
                 </div>
+                <div class="mb-4">
+                    <label for="review" class="text-gray-900">Review</label>
+                    <form action="{{ route('buku.rate', $buku->id) }}"" method="POST">
+                        @csrf
+                        <textarea class="w-full mt-1 px-2 py-2 rounded-lg border" name="review" id="review"></textarea>
+                        <div class="flex justify-center mt-4">
+                            <button class="bg-blue-500 text-white rounded-md py-2 px-4 mx-3" type="submit">Submit review</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="flex justify-center mt-4">
                     <form method="POST" action="{{ route('buku.favorite', $buku->id) }}">
                         @csrf

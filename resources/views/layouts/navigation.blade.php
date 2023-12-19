@@ -23,7 +23,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('buku.favorite')">
+                    <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
                         {{ __('Buku Favorite') }}
                     </x-nav-link>
                 </div>

@@ -40,6 +40,8 @@ Route::post('/buku/rate/{id}', [BukuController::class, 'rate'])->name('buku.rate
 Route::post('/buku/favorites/{id}', [BukuController::class, 'addToFavorites'])->name('buku.favorite');
 Route::get('/buku/myfavorite', [FavoriteController::class, 'index'])->name('favorites.index');
 
+Route::get('/buku/populer', [BukuController::class, 'populer'])->name('buku.populer');
+
 Route::middleware('auth')->group(function () {
 
     Route::middleware('admin')->group(function () {
