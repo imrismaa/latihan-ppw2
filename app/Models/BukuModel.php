@@ -44,4 +44,9 @@ class BukuModel extends Model
     {
         return $this->hasMany(ReviewModel::class, 'buku_id', 'id');
     }
+
+    public function kategori()
+    {
+        return $this->belongsToMany(KategoriModel::class, 'buku_kategori', 'buku_id', 'kategori_id');
+    }
 }
