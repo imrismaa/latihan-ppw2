@@ -1,5 +1,12 @@
 <body>
     <x-app-layout>
+
+        <x-slot name="header">
+            <h2 class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Buku Populer') }}
+            </h2>
+        </x-slot>
+
         <form action="{{ route('buku.search') }}" method="get">
             @csrf
             <input type="text" name="kata" class="form-control sm:rounded-lg mr-6 mt-3" 
